@@ -1,0 +1,7 @@
+# This playbook serves to setup a new bahmni server
+
+- hosts: all
+  become: yes
+  gather_facts: false
+  roles:
+    - bahmni

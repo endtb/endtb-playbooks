@@ -1,0 +1,104 @@
+#!/bin/bash
+
+VAGRANT_BOX_DIR="/home/mseaton/environments/endtb"
+VAGRANT_CONFIG_SRC="/home/vagrant/bahmni_config/openmrs"
+VAGRANT_BAHMNI_APPS_SRC="/home/vagrant/bahmniapps"
+
+STARTING_DIR="$PWD"
+BIN_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PRIVATE_KEY="$VAGRANT_BOX_DIR/.vagrant/machines/default/virtualbox/private_key"
+VAGRANT_CONFIG_DEST="/var/www/bahmni_config"
+VAGRANT_BAHMNI_APPS_DEST="/var/www/bahmniapps"
+RUN_LIQUIBASE="/opt/bahmni-installer/bahmni-playbooks/roles/implementation-config/files/run-implementation-openmrs-liquibase.sh"
+
+# Arg 1:  -c if the second argument is a command, -f if the second argument is a file
+# Usage:  run_in_vagrant -c "echo 'hello'"
+function run_in_vagrant {
+    if [ "$1" == "-c" ]; then
+		ssh vagrant@$192.168.33.21 -i $PRIVATE_KEY "-o ConnectTimeout=5" "$2"
+	elif [ "$1" == "-f" ]; then
+		ssh vagrant@$192.168.33.21 -i $PRIVATE_KEY "-o ConnectTimeout=5" < "$2"
+	fi
+}
+
+function tail_log() {
+	run_in_vagrant -c "tail -f /opt/openmrs/log/openmrs.log"
+}
+
+function copy_implementation_config() {
+	run_in_vagrant -c "sudo rsync -az --delete --exclude '*.iml' $VAGRANT_CONFIG_SRC $VAGRANT_CONFIG_DEST"
+	run_in_vagrant -c "sudo chmod -R 0755 $VAGRANT_CONFIG_DEST"
+	run_in_vagrant -c "sudo chown -R bahmni:bahmni $VAGRANT_CONFIG_DEST"
+}
+
+function copy_bahmni_apps_dist() {
+	run_in_vagrant -c "sudo rsync -az --delete --exclude '*.iml' $VAGRANT_BAHMNI_APPS_SRC/ui/dist/* $VAGRANT_BAHMNI_APPS_DEST"
+	run_in_vagrant -c "sudo chmod -R 0755 $VAGRANT_BAHMNI_APPS_DEST"
+	run_in_vagrant -c "sudo chown -R bahmni:bahmni $VAGRANT_BAHMNI_APPS_DEST"
+}
+
+function copy_bahmni_apps_app() {
+	run_in_vagrant -c "sudo rsync -az --delete --exclude '*.iml' $VAGRANT_BAHMNI_APPS_SRC/ui/app/* $VAGRANT_BAHMNI_APPS_DEST"
+	run_in_vagrant -c "sudo chmod -R 0755 $VAGRANT_BAHMNI_APPS_DEST"
+	run_in_vagrant -c "sudo chown -R bahmni:bahmni $VAGRANT_BAHMNI_APPS_DEST"
+}
+
+# Arg 1:  The source directory of the module you wish to build and deploy
+# Arg 2:  Additional maven parameters (eg. -DskipTests)
+# Example:  ./endtbdev build-and-copy-omod ~/code/addresshierarchy -DskipTests
+function build_and_copy_omod() {
+	mvn clean install -f $1 $2
+	local OMOD_PATH=$(ls $1/omod/target/*.omod)
+	local OMOD_NAME="${OMOD_PATH##*/}"
+	local MODULE_ID="${OMOD_NAME%%-*}"
+	cp $OMOD_PATH $BIN_PATH
+	run_in_vagrant -c "sudo rm /opt/openmrs/modules/$MODULE_ID-*.omod"
+	run_in_vagrant -c "sudo mv /vagrant/$OMOD_NAME /opt/openmrs/modules"
+	run_in_vagrant -c "sudo chown bahmni:bahmni /opt/openmrs/modules/$OMOD_NAME"
+}
+
+function run_liquibase() {
+  run_in_vagrant -c "sudo $RUN_LIQUIBASE"  
+}
+
+case $1 in
+start)
+  vagrant up
+  tail_log
+  ;;
+stop)
+  vagrant halt
+  ;;
+log)
+  tail_log
+  ;;
+liquibase)
+  copy_implementation_config
+  run_liquibase
+  ;;  
+copy-implementation-config)
+  copy_implementation_config
+  ;;
+copy-bahmniapps-dist)
+   copy_bahmni_apps_dist
+   ;;
+copy-bahmniapps-app)
+   copy_bahmni_apps_app
+   ;;
+build-and-copy-omod)
+	build_and_copy_omod $2 $3
+	;;
+*)
+  echo "USAGE:"
+  echo ""
+  echo "  start: Starts up the vagrant box and the bahmni instance"
+  echo "  stop: Halts the vagrant box"
+  echo "  log: Tails the OpenMRS log file"
+  echo "  copy-implementation-config: Copies the implementation config from vagrant staging directory to the vagrant deploy directory"
+  echo "  copy-bahmniapps-dist: Copies the bahmniapps dist from vagrant staging directory to vagrant /var/www/bahmniapps"
+  echo "  copy-bahmniapps-app: Copies the bahmniapps dist from vagrant staging directory to vagrant /var/www/bahmniapps"
+  echo "  liquibase: Runs liquibase file on the vagrant instance"
+  echo "  build-and-copy-omod: Builds the module located at the path specified in arg2, with maven argumens specified at arg3"
+  echo ""
+  ;;
+esac

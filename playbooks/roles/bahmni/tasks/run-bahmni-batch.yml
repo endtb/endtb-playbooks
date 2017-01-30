@@ -1,0 +1,5 @@
+
+- name: Run bahmni batch
+  shell: /usr/bin/bahmni-batch
+  args:
+    executable: /bin/bash

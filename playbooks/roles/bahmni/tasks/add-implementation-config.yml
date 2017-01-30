@@ -1,0 +1,37 @@
+# Remove existing configuration
+
+- name: Clear any existing deployment artifacts
+  file: path={{ bahmni_deployment_artifacts }}/deployment_artifacts state=absent
+
+- name: Remove any previous release config folders
+  file: path={{ bahmni_deployment_artifacts }}/endtb-config-release-* state=absent
+
+# Download new configuration
+
+- name: Set directory to use to extract config files
+  set_fact: extract_dir=/tmp/bahmni-implementation-artifacts
+
+- name: Remove any old directory for extracting files
+  file: path={{ extract_dir }} state=absent
+
+- name: Create directory for extracting files
+  file: path={{ extract_dir }} state=directory
+
+- name: Download implementation config from remote location as zip file
+  get_url: url={{ implementation_config_url }} dest={{ extract_dir }}
+
+- name: Extract implementation config zip file
+  shell: unzip {{ extract_dir }}/*.zip && rm *.zip && mv {{ extract_dir }}/* {{ extract_dir }}/endtb_config && cp -a {{ extract_dir }}/* {{ bahmni_deployment_artifacts }}
+  args:
+    chdir: "{{ extract_dir }}"
+    executable: /bin/bash
+
+# Set permissions on config files
+
+- name: Set permissions on implementation config
+  file: path={{ bahmni_deployment_artifacts }}/endtb_config owner=bahmni group=bahmni mode=0755 recurse=yes
+
+# Add starter database SQL
+
+- name: Add starter database sql to deployment artifacts
+  shell: cp {{ bahmni_deployment_artifacts }}/endtb_config/dbdump/mysql_dump.sql {{ bahmni_deployment_artifacts }}/openmrs_backup.sql

@@ -1,0 +1,17 @@
+# See: https://talk.openmrs.org/t/installing-bahmni-with-limited-internet/5392
+
+- name: Check whether yum caching is configured
+  stat: path=/etc/yum_cache
+  register: yum_cache_folder
+
+- name: Enable caching of yum repositories
+  command: sed -i "s|keepcache=0|keepcache=1|g" /etc/yum.conf
+  when: yum_cache_folder.stat.isdir is defined and yum_cache_folder.stat.isdir
+
+- name: Set yum cache folder to one that is externally mounted for vagrant, if configured
+  command: sed -i "s|cachedir=/var/cache/yum/\$basearch/\$releasever|cachedir=/etc/yum_cache|g" /etc/yum.conf
+  when: yum_cache_folder.stat.isdir is defined and yum_cache_folder.stat.isdir
+
+- name: Copy opt_rpms into /opt (this is needed for java download for example
+  shell: cp /etc/yum_cache/opt_rpms/* /opt
+  when: yum_cache_folder.stat.isdir is defined and yum_cache_folder.stat.isdir
