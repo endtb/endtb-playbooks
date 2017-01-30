@@ -4,6 +4,10 @@
   stat: path=/etc/yum_cache
   register: yum_cache_folder
 
+- name: Check whether yum caching has run for the first time
+  stat: path=/etc/yum_cache/opt_rpms
+  register: yum_cache_rpms_folder
+
 - name: Enable caching of yum repositories
   command: sed -i "s|keepcache=0|keepcache=1|g" /etc/yum.conf
   when: yum_cache_folder.stat.isdir is defined and yum_cache_folder.stat.isdir
@@ -14,4 +18,4 @@
 
 - name: Copy opt_rpms into /opt (this is needed for java download for example
   shell: cp /etc/yum_cache/opt_rpms/* /opt
-  when: yum_cache_folder.stat.isdir is defined and yum_cache_folder.stat.isdir
+  when: yum_cache_rpms_folder.stat.isdir is defined and yum_cache_rpms_folder.stat.isdir
