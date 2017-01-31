@@ -78,7 +78,7 @@ log)
   tail_log
   ;;
 liquibase)
-  copy_implementation_config
+  copy_endtb_config
   run_liquibase
   ;;
 copy-endtb-config)
