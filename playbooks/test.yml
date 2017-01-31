@@ -1,0 +1,9 @@
+
+# Test playbook
+
+- hosts: all
+  become: yes
+  tasks:
+
+    - name: Return the hostname of the server
+      command: hostname
