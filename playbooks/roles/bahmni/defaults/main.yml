@@ -6,11 +6,11 @@ bahmni_installer_url: "{{ bahmni_repo_url }}/rpms/bahmni-installer-{{ bahmni_ver
 
 # Customizations to install - endtb_config and custom omods
 
-implementation_config_url: "https://github.com/Bahmni/endtb-config/archive/release-0.86.zip"
+implementation_config_url: "https://github.com/endtb/endtb-config/archive/master.zip"
 
 bahmni_installer_directory: "/etc/bahmni-installer"
 bahmni_deployment_artifacts: "{{ bahmni_installer_directory }}/deployment-artifacts"
-omods: ["https://s3.amazonaws.com/endtb-artifacts/1.6/bahmniendtb-1.6-SNAPSHOT.omod", "https://modules.openmrs.org/modulus/api/releases/1519/download/dataintegrity-omod-4.1.0.omod"]
+omods: ["https://dl.bintray.com/endtb/snapshots/bahmniendtb-1.6-SNAPSHOT.omod", "https://modules.openmrs.org/modulus/api/releases/1519/download/dataintegrity-omod-4.1.0.omod"]
 
 # Expected to be overridden for a particular environment (eg. production, test)
 # For all options, see https://bahmni.atlassian.net/wiki/display/BAH/List+Of+Configurable+Installation+Variables
@@ -23,3 +23,5 @@ openmrs_server_options: "-Xms1024m -Xmx2048m -XX:PermSize=512m -XX:MaxPermSize=1
 openmrs_user_password: "Admin123"
 openmrs_db_password: "openmrs"
 mysql_root_password: "root"
+
+
