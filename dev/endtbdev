@@ -98,6 +98,7 @@ build-and-copy-omod)
   echo ""
   echo "  start: Starts up the vagrant box and the bahmni instance"
   echo "  stop: Halts the vagrant box"
+  echo "  debug: Start up the vagrant box (if necessary) and then start (or restart) OpenMRS in debug mode"
   echo "  log: Tails the OpenMRS log file"
   echo "  copy-endtb-config: Copies the implementation config from vagrant staging directory to the vagrant deploy directory"
   echo "  copy-bahmniapps-dist: Copies the bahmniapps dist from vagrant staging directory to vagrant /var/www/bahmniapps"
