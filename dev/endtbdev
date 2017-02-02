@@ -73,6 +73,7 @@ debug)
   vagrant up
   run_in_vagrant -c "sudo service openmrs stop"
   run_in_vagrant -c "sudo service openmrs debug"
+  run_in_vagrant -c "sudo service iptables stop"
   ;;
 log)
   tail_log
