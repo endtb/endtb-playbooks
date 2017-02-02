@@ -19,12 +19,7 @@
 # and given configuration in line with what the next versions will support
 
 - name: Patch SSL configuration
-  template:
-      src=ssl.conf.j2
-      dest=/opt/bahmni-installer/bahmni-playbooks/roles/bahmni-web/templates
-      mode=755
-      owner=bahmni
-      group=bahmni
+  copy: src=ssl.conf.j2 dest=/opt/bahmni-installer/bahmni-playbooks/roles/bahmni-web/templates mode=755 owner=bahmni group=bahmni
 
 ###### end temporary patch
 
