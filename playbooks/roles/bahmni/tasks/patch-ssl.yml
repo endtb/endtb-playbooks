@@ -5,20 +5,20 @@
 - name: Patch SSLCertificateFile
   replace:
     dest: /opt/bahmni-installer/bahmni-playbooks/roles/bahmni-web/templates/ssl.conf.j2
-    regexp: "SSLCertificateFile \/etc\/bahmni-certs\/cert\.crt"
+    regexp: 'SSLCertificateFile \/etc\/bahmni-certs\/cert\.crt'
     replace: "SSLCertificateFile {{ ssl_certificate_file_path }}"
     backup: yes
 
 - name: Patch SSLCertificateKeyFile
   replace:
     dest: /opt/bahmni-installer/bahmni-playbooks/roles/bahmni-web/templates/ssl.conf.j2
-    regexp: "SSLCertificateKeyFile \/etc\/bahmni-certs\/domain\.key"
+    regexp: 'SSLCertificateKeyFile \/etc\/bahmni-certs\/domain\.key'
     replace: "SSLCertificateKeyFile {{ ssl_certificate_key_file_path }}"
     backup: yes
 
 - name: SSLCertificateChainFile
   replace:
     dest: /opt/bahmni-installer/bahmni-playbooks/roles/bahmni-web/templates/ssl.conf.j2
-    regexp: "SSLCertificateChainFile \/etc\/bahmni-certs\/chained\.pem"
+    regexp: 'SSLCertificateChainFile \/etc\/bahmni-certs\/chained\.pem'
     replace: "SSLCertificateChainFile {{ ssl_certificate_chains_file_path }}"
     backup: yes
