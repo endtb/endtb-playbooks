@@ -15,11 +15,10 @@
 ###### start temporary patch
 
 # This will not be needed in the future, but for now release-0.86 does not support configuring SSL certificate paths
-# Once it does, we can remove our custom ssl.conf.j2 inclusion, which was copied from the release-0.86 branch
-# and given configuration in line with what the next versions will support
+# Once it does, we can remove this and do it via configuration in setup.yml.j2
 
-- name: Patch SSL configuration
-  copy: src=ssl.conf.j2 dest=/opt/bahmni-installer/bahmni-playbooks/roles/bahmni-web/templates mode=755 owner=bahmni group=bahmni
+- include: patch-ssl.yml
+  when: ssl_certificate_file_path is defined
 
 ###### end temporary patch
 
