@@ -7,6 +7,6 @@
   register: yum_cache_rpms_folder
 
 - name: Copy anything that exists in /opt into /etc/yum_cache/opt_rpms (this is needed for java download for example)
-  shell: cp /opt/* /etc/yum_cache/opt_rpms
+  shell: cp /opt/*.rpm /etc/yum_cache/opt_rpms
   when: yum_cache_rpms_folder.stat.isdir is defined and yum_cache_rpms_folder.stat.isdir
   ignore_errors: yes

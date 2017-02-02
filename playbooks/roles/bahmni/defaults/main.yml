@@ -23,8 +23,3 @@ openmrs_server_options: "-Xms1024m -Xmx2048m -XX:PermSize=512m -XX:MaxPermSize=1
 openmrs_user_password: "Admin123"
 openmrs_db_password: "openmrs"
 mysql_root_password: "root"
-
-# By default, use the same certificate file paths that ship with Bahmni.  These can be overridden by host or group as or if needed.
-ssl_certificate_file_path: /opt/bahmni-certs/certs/cert1.pem
-ssl_certificate_key_file_path: /opt/bahmni-certs/certs/privkey1.pem
-ssl_certificate_chains_file_path: /opt/bahmni-certs/certs/chain1.pem
