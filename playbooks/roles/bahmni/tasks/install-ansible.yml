@@ -6,3 +6,4 @@
 
 - name: Install ansible
   command: yum install -y /etc/yum_cache/ansible-2.2.0.0-3.el6.noarch.rpm
+  ignore_errors: yes
