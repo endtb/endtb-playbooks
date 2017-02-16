@@ -37,3 +37,12 @@
   args:
     chdir: "{{ bahmni_installer_directory }}"
     executable: /bin/bash
+
+###### Performance patch for bahmniapps 0.86.  See: https://tickets.pih-emr.org/browse/ED-21
+
+# This step can likely be removed if we fork and customize bahmniapps on our own, or upgrade to a later version of Bahmni
+
+- name: Execute the PerformanceFix_PatientSummary.sh patch
+  script: "{{ role_path }}/files/PerformanceFix_PatientSummary.sh"
+
+###### end peformance patch
