@@ -1,6 +1,7 @@
 # EndTB System Provisioning
 
 ## Development Environment Setup
+Follow instructions for checking out and setting up any
 
 ### Prerequisites
 1. Install latest versions of Ansible, VirtualBox, and Vagrant
@@ -9,12 +10,13 @@
 ### Create your Vagrant Box
 1. Copy the "Vagrantfile" and "endtbdev" script found in the "dev" folder of this project to "~/bahmni/environments/endtb".  
 (If you wish to use a directory other than "~/environments/endtb" to set up your VM you'll need to modify VAGRANT_BOX_DIR in the endtbdev script
-2. Modify this file:
+2. Modify "Vagrantfile" this file:
 - Change "{{ENDTB_CONFIG_SRC_DIR}}" to point to the "openmrs" subfolder of the source folder for endtb config on your local machine
 - Change "{{BAHMNI_APPS_SRC_DIR}}" to point to the source folder for bahmniapps on your local machine
 - Adjust the memory allocated to the VM based on your machine's capacity
-- Remove or modify the config.vm.synced_folder "../yum_cache/", "/etc/yum_cache".  This is for enables caching of rpms to be stored outside of vagrant. You'll need to make sure the source directory exists on your host if you want to cache.
-(More infor on cache issues: https://talk.openmrs.org/t/installing-bahmni-with-limited-internet/5392)
+- If you want to enable caching of rpms outside of vagrant (More info on cache issues: https://talk.openmrs.org/t/installing-bahmni-with-limited-internet/5392), 
+change 'config.vm.synced_folder "../yum_cache/", "/etc/yum_cache"' so that the source directory ("../yum_cache") references a directory that exists on your machine.
+(If you don't care about caching, you can remove this line)
 3. Run "vagrant up" from this directory
 4. You might need to SSH into this box for the first time to ensure proper keys are set up (run "ssh vagrant@192.168.33.21", password="vagrant")
 
