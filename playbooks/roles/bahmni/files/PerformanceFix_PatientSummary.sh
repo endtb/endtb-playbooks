@@ -26,6 +26,6 @@ if [[ $current_md5 == $original_md5 ]]; then
                 exit 1
         fi
 else
-        echo 'ERROR: File to be patched does not match expectations.'
-        exit 1
+        echo 'File to be patched does not match expectations, skipping'
+        exit 0
 fi
