@@ -25,7 +25,7 @@
 # Run the bahmni installer from the {{ bahmni_installer_directory }} directory
 
 - name: Run the bahmni installer
-  shell: bahmni -i inventory -av 2.2.0.0 install
+  shell: bahmni -i inventory install
   args:
     chdir: "{{ bahmni_installer_directory }}"
     executable: /bin/bash
