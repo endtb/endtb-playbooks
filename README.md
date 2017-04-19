@@ -12,6 +12,7 @@ Follow instructions for checking out and setting up any
 (If you wish to use a directory other than "~/environments/endtb" to set up your VM you'll need to modify VAGRANT_BOX_DIR in the endtbdev script
 2. Modify "Vagrantfile" this file:
 - Change "{{ENDTB_CONFIG_SRC_DIR}}" to point to the "openmrs" subfolder of the source folder for endtb config on your local machine
+- Change "{{IMPLEMENTATION_CONFIG_SRC_DIR}}" to point to the "openmrs" subfolder of the source folder for the implementation config on your local machine you wish to use
 - Change "{{BAHMNI_APPS_SRC_DIR}}" to point to the source folder for bahmniapps on your local machine
 - Adjust the memory allocated to the VM based on your machine's capacity
 - If you want to enable caching of rpms outside of vagrant (More info on cache issues: https://talk.openmrs.org/t/installing-bahmni-with-limited-internet/5392), 

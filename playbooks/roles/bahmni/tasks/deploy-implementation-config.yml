@@ -1,0 +1,32 @@
+
+- name: Download implementation_config from remote location as zip file
+  get_url: url={{ implementation_config_zip_url }} dest={{ bahmni_deployment_artifacts }}/implementation_config.zip
+  when: implementation_config_zip_url is defined
+
+- stat: path={{ bahmni_deployment_artifacts }}/implementation_config.zip
+  register: implementation_config_zip
+
+- name: Create tmp directory
+  file: path={{ bahmni_deployment_artifacts }}/implementation_config_tmp  state=directory
+
+- name: Extract contents of zip file into tmp directory
+  unarchive: src={{ bahmni_deployment_artifacts }}/implementation_config.zip dest={{ bahmni_deployment_artifacts }}/implementation_config_tmp copy=no
+  when: implementation_config_zip.stat.exists == True
+
+- name: Create implementation_config directory
+  file: path=/var/www/implementation_config  state=directory
+
+- name: Clear out existing implementation config content
+  command: "rm -fR /var/www/implementation_config"
+  when: implementation_config_zip.stat.exists == True
+
+- name: Move subdirectory into implementation_config directory and rename
+  command: "mv -T {{ bahmni_deployment_artifacts }}/implementation_config_tmp/{{ implementation_config_subdirectory }} /var/www/implementation_config"
+  when: implementation_config_zip.stat.exists == True
+
+- name: Set permissions on implementation_config dir
+  file: path=/var/www/implementation_config owner=bahmni group=bahmni mode=0755 recurse=yes
+
+- name: Remove downloaded zip file
+  file: path={{ bahmni_deployment_artifacts }}/implementation_config.zip state=absent
+

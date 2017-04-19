@@ -3,12 +3,14 @@
 VAGRANT_BOX_DIR="~/bahmni/environments/endtb"
 VAGRANT_CONFIG_SRC="/home/vagrant/bahmni_config/openmrs"
 VAGRANT_BAHMNI_APPS_SRC="/home/vagrant/bahmniapps"
+VAGRANT_IMPLEMENTATION_CONFIG_SRC="/home/vagrant/implementation_config/openmrs"
 
 STARTING_DIR="$PWD"
 BIN_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PRIVATE_KEY="$VAGRANT_BOX_DIR/.vagrant/machines/default/virtualbox/private_key"
 VAGRANT_CONFIG_DEST="/var/www/bahmni_config"
 VAGRANT_BAHMNI_APPS_DEST="/var/www/bahmniapps"
+VAGRANT_IMPLEMENTATION_CONFIG_DEST="/var/www/implementation_config"
 RUN_LIQUIBASE="/opt/bahmni-installer/bahmni-playbooks/roles/implementation-config/files/run-implementation-openmrs-liquibase.sh"
 
 # Arg 1:  -c if the second argument is a command, -f if the second argument is a file
@@ -30,6 +32,13 @@ function copy_endtb_config() {
 	run_in_vagrant -c "sudo chmod -R 0755 $VAGRANT_CONFIG_DEST"
 	run_in_vagrant -c "sudo chown -R bahmni:bahmni $VAGRANT_CONFIG_DEST"
 }
+
+function copy_implementation_config() {
+	run_in_vagrant -c "sudo rsync -az --delete --exclude '*.iml' $VAGRANT_IMPLEMENTATION_CONFIG_SRC $VAGRANT_IMPLEMENTATION_CONFIG_DEST"
+	run_in_vagrant -c "sudo chmod -R 0755 $VAGRANT_IMPLEMENTATION_CONFIG_DEST"
+	run_in_vagrant -c "sudo chown -R bahmni:bahmni $VAGRANT_IMPLEMENTATION_CONFIG_DEST"
+}
+
 
 function copy_bahmni_apps_dist() {
 	run_in_vagrant -c "sudo rsync -az --delete --exclude '*.iml' $VAGRANT_BAHMNI_APPS_SRC/ui/dist/* $VAGRANT_BAHMNI_APPS_DEST"
@@ -85,6 +94,9 @@ liquibase)
 copy-endtb-config)
   copy_endtb_config
   ;;
+copy-implementation-config)
+  copy_implementation_config
+  ;;
 copy-bahmniapps-dist)
    copy_bahmni_apps_dist
    ;;
@@ -102,6 +114,7 @@ build-and-copy-omod)
   echo "  debug: Start up the vagrant box (if necessary) and then start (or restart) OpenMRS in debug mode"
   echo "  log: Tails the OpenMRS log file"
   echo "  copy-endtb-config: Copies the implementation config from vagrant staging directory to the vagrant deploy directory"
+  echo "  copy-implementation-config: Copies the implementation config from vagrant staging directory to the vagrant deploy directory"
   echo "  copy-bahmniapps-dist: Copies the bahmniapps dist from vagrant staging directory to vagrant /var/www/bahmniapps"
   echo "  copy-bahmniapps-app: Copies the bahmniapps dist from vagrant staging directory to vagrant /var/www/bahmniapps"
   echo "  liquibase: Runs liquibase file on the vagrant instance"

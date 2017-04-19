@@ -17,10 +17,10 @@
 - name: Create directory for extracting files
   file: path={{ extract_dir }} state=directory
 
-- name: Download implementation config from remote location as zip file
-  get_url: url={{ implementation_config_url }} dest={{ extract_dir }}
+- name: Download endtb config from remote location as zip file
+  get_url: url={{ endtb_config_url }} dest={{ extract_dir }}
 
-- name: Extract implementation config zip file
+- name: Extract endtb config zip file
   shell: unzip {{ extract_dir }}/*.zip && rm *.zip && mv {{ extract_dir }}/* {{ extract_dir }}/endtb_config && cp -a {{ extract_dir }}/* {{ bahmni_deployment_artifacts }}
   args:
     chdir: "{{ extract_dir }}"
