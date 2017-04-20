@@ -15,8 +15,8 @@ openmrs_data_directory: "/opt/openmrs"
 
 
 # These should be set with implementation-specific config for a particular country
-# implementation_config_zip_url: ""
-# implementation_config_subdirectory: ""
+# implementation_config_zip_url: "https://github.com/PIH/pih-bahmni-config/archive/master.zip"
+# implementation_config_subdirectory: "pih-bahmni-config-master/endTB-implementation-config/peru_implementation_config"
 
 bahmni_installer_directory: "/etc/bahmni-installer"
 bahmni_deployment_artifacts: "{{ bahmni_installer_directory }}/deployment-artifacts"
