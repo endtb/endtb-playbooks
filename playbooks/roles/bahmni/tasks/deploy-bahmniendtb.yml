@@ -1,0 +1,9 @@
+
+- name: Download bahmniendtb from remote location
+  get_url: url={{ bahmniendtb_omod_url }} dest={{ openmrs_data_directory }}/modules/{{ bahmniendtb_omod_target_name }}
+  when: bahmniendtb_omod_url is defined
+  register: bahmniendtb_installed
+
+- name: Restart OpenMRS
+  service: name=openmrs state=restarted
+  when: bahmniendtb_installed.changed
