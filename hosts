@@ -9,11 +9,3 @@ endtb.pih-emr.org
 [endtb-test-peru]
 72.249.182.25
 
-[endtb-test:vars]
-ssl_certificate_file_path=/etc/ssl/certs/3c11bbafd54a6f8c.crt
-ssl_certificate_key_file_path=/etc/ssl/private/pih-emr.org.key
-ssl_certificate_chains_file_path=/etc/ssl/certs/gd_bundle-g2-g1.crt
-
-[endtb-test-peru:vars]
-implementation_config_zip_url="https://github.com/PIH/pih-bahmni-config/archive/master.zip"
-implementation_config_subdirectory="pih-bahmni-config-master/endTB-implementation-config/peru_implementation_config"
