@@ -1,0 +1,8 @@
+# This playbook serves to setup a new bahmni server, using encrypted variables in group_vars_secure/endtb-test-peru.yml
+- hosts: all
+  become: yes
+  gather_facts: false
+  vars_files:
+    - '../group_vars_secure/endtb-test-peru.yml'
+  roles:
+    - bahmni

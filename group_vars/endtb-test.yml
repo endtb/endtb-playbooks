@@ -2,4 +2,3 @@
 ssl_certificate_file_path: /etc/ssl/certs/3c11bbafd54a6f8c.crt
 ssl_certificate_key_file_path: /etc/ssl/private/pih-emr.org.key
 ssl_certificate_chains_file_path: /etc/ssl/certs/gd_bundle-g2-g1.crt
-
