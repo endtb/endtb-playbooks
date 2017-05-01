@@ -1,5 +1,7 @@
 
 - name: Run bahmni batch
   shell: /usr/bin/bahmni-batch
+  become: yes
+  become_user: bahmni
   args:
     executable: /bin/bash
