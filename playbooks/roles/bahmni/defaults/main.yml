@@ -9,7 +9,7 @@ bahmni_installer_url: "{{ bahmni_repo_url }}/rpms/bahmni-installer-{{ bahmni_ver
 endtb_config_url: "https://github.com/endtb/endtb-config/archive/master.zip"
 bahmniapps_zip_url: "http://bamboo.pih-emr.org/bahmni-repo/endtb-bahmniapps-0.88-latest.zip"
 
-bahmniendtb_omod_url: "https://openmrs.jfrog.io/openmrs/public/org/bahmni/module/bahmniendtb-omod/1.8-SNAPSHOT/bahmniendtb-omod-1.8-SNAPSHOT.jar"
+bahmniendtb_omod_url: "https://openmrs.jfrog.io/openmrs/public/org/bahmni/module/bahmniendtb-omod/2.0.0/bahmniendtb-omod-2.0.0-SNAPSHOT.jar"
 bahmniendtb_omod_target_name: "bahmniendtb-1.8-SNAPSHOT.omod"
 openmrs_data_directory: "/opt/openmrs"
 
