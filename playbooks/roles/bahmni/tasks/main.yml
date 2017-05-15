@@ -9,4 +9,3 @@
 - include: add-additional-cache-artifacts.yml
 - include: deploy-bahmniapps.yml
 - include: deploy-implementation-config.yml
-- include: deploy-bahmniendtb.yml
