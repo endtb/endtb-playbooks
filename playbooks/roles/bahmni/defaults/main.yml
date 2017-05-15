@@ -9,13 +9,19 @@ bahmni_installer_url: "{{ bahmni_repo_url }}/rpms/bahmni-installer-{{ bahmni_ver
 endtb_config_url: "https://github.com/endtb/endtb-config/archive/master.zip"
 bahmniapps_zip_url: "http://bamboo.pih-emr.org/bahmni-repo/endtb-bahmniapps-0.88-latest.zip"
 
+# TODO replace this once we fix our build pipeline to actually deploy the omod to some place we can properly grab it from (
+bahmniendtb_omod_url: "https://openmrs.jfrog.io/openmrs/public/org/bahmni/module/bahmniendtb-omod/2.1.0-SNAPSHOT/bahmniendtb-omod-2.1.0-SNAPSHOT.jar"
+bahmniendtb_omod_target_name: "bahmniendtb-2.1.0-SNAPSHOT.omod"
+openmrs_data_directory: "/opt/openmrs"
+
+
 # These should be set with implementation-specific config for a particular country
 # implementation_config_zip_url: "https://github.com/PIH/pih-bahmni-config/archive/master.zip"
 # implementation_config_subdirectory: "pih-bahmni-config-master/endTB-implementation-config/peru_implementation_config"
 
 bahmni_installer_directory: "/etc/bahmni-installer"
 bahmni_deployment_artifacts: "{{ bahmni_installer_directory }}/deployment-artifacts"
-omods: [ "https://openmrs.jfrog.io/openmrs/public/org/bahmni/module/bahmniendtb-omod/2.1.0-SNAPSHOT/bahmniendtb-omod-2.1.0-SNAPSHOT.jar", "https://modules.openmrs.org/modulus/api/releases/1545/download/dataintegrity-4.2.3.omod", "https://s3.amazonaws.com/endtb-artifacts/1.6/bahmnicore-omod-0.88-SNAPSHOT.omod", "https://s3.amazonaws.com/endtb-artifacts/1.1/bacteriology-1.1-SNAPSHOT.omod"]
+omods: [ "https://modules.openmrs.org/modulus/api/releases/1545/download/dataintegrity-4.2.3.omod", "https://s3.amazonaws.com/endtb-artifacts/1.6/bahmnicore-omod-0.88-SNAPSHOT.omod", "https://s3.amazonaws.com/endtb-artifacts/1.1/bacteriology-1.1-SNAPSHOT.omod"]
 
 
 # Expected to be overridden for a particular environment (eg. production, test)
