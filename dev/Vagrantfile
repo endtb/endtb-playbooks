@@ -18,4 +18,9 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder "{{BAHMNI_APPS_SRC_DIR}}", "/home/vagrant/bahmniapps", create: true
   config.vm.synced_folder "{{IMPLEMENTATION_CONFIG_SRC_DIR}}", "/home/vagrant/implementation_config/openmrs", create: true
   config.vm.hostname = "endtb"
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "{{ENDTB_PLAYBOOKS_SRC_DIR}}/playbooks/bahmni.yml"
+  end
+
 end
