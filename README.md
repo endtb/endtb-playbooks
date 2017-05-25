@@ -14,6 +14,7 @@ Follow instructions for checking out and setting up any
 - Change "{{ENDTB_CONFIG_SRC_DIR}}" to point to the "openmrs" subfolder of the source folder for endtb config on your local machine
 - Change "{{IMPLEMENTATION_CONFIG_SRC_DIR}}" to point to the "openmrs" subfolder of the source folder for the implementation config on your local machine you wish to use
 - Change "{{BAHMNI_APPS_SRC_DIR}}" to point to the source folder for bahmniapps on your local machine
+- Change "{{ENDTB_PLAYBOOKS_SRC_DIR}}" to point to the top-level directory of this project on your local machine
 - Adjust the memory allocated to the VM based on your machine's capacity
 - If you want to enable caching of rpms outside of vagrant (More info on cache issues: https://talk.openmrs.org/t/installing-bahmni-with-limited-internet/5392), 
 change 'config.vm.synced_folder "../yum_cache/", "/etc/yum_cache"' so that the source directory ("../yum_cache") references a directory that exists on your machine.
@@ -22,6 +23,8 @@ change 'config.vm.synced_folder "../yum_cache/", "/etc/yum_cache"' so that the s
 4. You might need to SSH into this box for the first time to ensure proper keys are set up (run "ssh vagrant@192.168.33.21", password="vagrant")
 
 ### Provision your Vagrant Box
+
+Running a "vagrant up" should also provision your machine for you.  To run the ansible provisioning again, run "vagrant provision"
 
 From the root of this project, run "./deploy.sh".  This will connect to the Vagrant box set up above (the IP address in both
 is hard-coded to 192.168.33.21), and will setup Bahmni for endTB based on the configuration specified.
