@@ -7,9 +7,9 @@ bahmni_installer_url: "{{ bahmni_repo_url }}/rpms/bahmni-installer-{{ bahmni_ver
 # Customizations to install - endtb_config and custom omods
 
 endtb_config_url: "https://github.com/endtb/endtb-config/archive/master.zip"
-bahmniapps_zip_url: "http://bamboo.pih-emr.org/bahmni-repo/endtb-bahmniapps-0.88-latest.zip"
 
 # TODO replace this once we fix our build pipeline to actually deploy the omod to some place we can properly grab it from
+# this is used to deploy the latest build of our custom version of bahmniapps from our build pipeline; during a release
 #bahmniendtb_omod_url: "https://openmrs.jfrog.io/openmrs/public/org/bahmni/module/bahmniendtb-omod/2.1.0-SNAPSHOT/bahmniendtb-omod-2.1.0-SNAPSHOT.jar"
 #bahmniendtb_omod_target_name: "bahmniendtb-2.1.0-SNAPSHOT.omod"
 #openmrs_data_directory: "/opt/openmrs"
