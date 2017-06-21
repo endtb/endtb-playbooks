@@ -2,8 +2,8 @@
 - name: Customize report names
   replace:
     dest: "/var/www/bahmni_config/openmrs/apps/reports/reports.json"
-    regexp: '("name": [^\n]*)(",)'
-    replace: '\1 - {{ implementation_name }}\2'
+    regexp: '("name":\s*")'
+    replace: '\1{{ implementation_name }}-'
     backup: yes
   when: implementation_name != ""
 
