@@ -5,7 +5,7 @@ bahmni_repo_url: "http://dl.bintray.com/bahmni/rpm"
 bahmni_installer_url: "{{ bahmni_repo_url }}/rpms/bahmni-installer-{{ bahmni_version }}.noarch.rpm"
 
 # Customizations to install - endtb_config and custom omods
-
+implementation_name: ""
 endtb_config_url: "https://github.com/endtb/endtb-config/archive/master.zip"
 
 # TODO replace this once we fix our build pipeline to actually deploy the omod to some place we can properly grab it from

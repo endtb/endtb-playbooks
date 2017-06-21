@@ -9,3 +9,4 @@
 - include: add-additional-cache-artifacts.yml
 - include: deploy-implementation-config.yml
 - include: deploy-bahmniendtb.yml
+- include: customize-report-names.yml

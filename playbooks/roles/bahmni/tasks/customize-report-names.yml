@@ -1,0 +1,9 @@
+# Customize report names based on location
+- name: Customize report names
+  replace:
+    dest: "/var/www/bahmni_config/openmrs/apps/reports/reports.json"
+    regexp: '("name": [^\n]*)(",)'
+    replace: '\1 - {{ implementation_name }}\2'
+    backup: yes
+  when: implementation_name != ""
+
