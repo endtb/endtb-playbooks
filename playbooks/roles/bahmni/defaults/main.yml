@@ -21,8 +21,11 @@ openmrs_data_directory: "/opt/openmrs"
 
 bahmni_installer_directory: "/etc/bahmni-installer"
 bahmni_deployment_artifacts: "{{ bahmni_installer_directory }}/deployment-artifacts"
+
+// TODO: figure out/remember why this variable is defined in both endtb-playbooks and endtb-config?
 #omods: [ "https://github.com/endtb/openmrs-module-bahmniendtb/releases/download/2.1.0/bahmniendtb-2.1.0.omod", "https://modules.openmrs.org/modulus/api/releases/1545/download/dataintegrity-4.2.3.omod", "https://s3.amazonaws.com/endtb-artifacts/1.6/bahmnicore-omod-0.88-SNAPSHOT.omod", "https://s3.amazonaws.com/endtb-artifacts/1.1/bacteriology-1.1-SNAPSHOT.omod"]
-omods: [ "https://modules.openmrs.org/modulus/api/releases/1545/download/dataintegrity-4.2.3.omod", "https://s3.amazonaws.com/endtb-artifacts/1.6/bahmnicore-omod-0.88-SNAPSHOT.omod", "https://s3.amazonaws.com/endtb-artifacts/1.1/bacteriology-1.1-SNAPSHOT.omod"]
+omods: ["https://github.com/endtb/openmrs-module-bahmniendtb/releases/download/2.1.0/bahmniendtb-2.1.0.omod", "https://modules.openmrs.org/modulus/api/releases/1545/download/dataintegrity-4.2.3.omod", "https://s3.amazonaws.com/endtb-artifacts/1.6/bahmnicore-omod-0.88-SNAPSHOT.omod", "https://github.com/Bahmni/bacteriology/releases/download/1.1/bacteriology-1.1.omod"]
+
 
 # Expected to be overridden for a particular environment (eg. production, test)
 # For all options, see https://bahmni.atlassian.net/wiki/display/BAH/List+Of+Configurable+Installation+Variables
