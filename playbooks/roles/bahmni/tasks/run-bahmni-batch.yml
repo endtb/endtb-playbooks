@@ -1,7 +1,14 @@
 
+- name: Create bahmni-batch config directory
+  file: path=/opt/bahmni-batch/config state=directory
+
+- name: Install custom application.properties for bahmni batch
+  template: src=application.properties.j2 dest=/opt/bahmni-batch/config/application.properties
+
 - name: Run bahmni batch
   shell: /usr/bin/bahmni-batch
   become: yes
   become_user: bahmni
   args:
     executable: /bin/bash
+
