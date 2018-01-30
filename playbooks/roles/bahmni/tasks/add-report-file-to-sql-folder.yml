@@ -1,0 +1,2 @@
+- name: Copy sql file to the sql folder in the reports app
+  copy: src=sql/{{ culture_report }} dest={{ reports_sql_folder }} mode=0755 owner=bahmni group=bahmni
