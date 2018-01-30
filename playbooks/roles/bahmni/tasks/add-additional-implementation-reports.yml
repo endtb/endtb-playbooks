@@ -1,0 +1,16 @@
+- name: backup report.jsom
+  fetch: dest=/home/bahmni/reports.json  src=/var/www/bahmni_config/openmrs/app/reports/reports.json flat=yes
+
+- name: Transfer the script
+  copy: src=add_lines_to_reportjson.sh dest=/home/bahmni mode=0777
+
+- name: Transfer the script
+  copy: src=delete_last_lines_reportsjson.sh dest=/home/bahmni mode=0777
+
+- name: Delete last line in report.json
+  shell:  sh /home/bahmni/delete_last_lines_reportsjson.sh
+
+- name: Add lines in report.json
+  shell:  sh /home/bahmni/add_lines_to_reportjson.sh
+
+
