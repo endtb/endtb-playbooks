@@ -42,3 +42,9 @@ mysql_root_password: "root"
 # used to restrict bahmni batch exports to restrict result cohort to those with a treatment initiation; used in Lesotho to distinguish endTB patients from "regular" MDR-TB patients
 # (see: https://tickets.pih-emr.org/browse/ED-94)
 exports_restrict_by_treatment_initiation_cohort: "false"
+
+##Implementation specific reports configurations
+culture_report: cultureResults.sql
+reports_sql_folder: "/var/www/bahmni_config/openmrs/apps/reports/sql"
+bahmni_user: "bahmni"
+bahmni_group: "bahmni"
