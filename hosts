@@ -1,11 +1,11 @@
+#Productipon
+
+[all]
+
 # DEV AND TEST SERVERS
 
 [endtb-dev]
-192.168.33.21 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+#192.168.33.21 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
 
 [endtb-test]
-endtb.pih-emr.org
-
-[endtb-test-peru]
-72.249.182.25
 
