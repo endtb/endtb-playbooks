@@ -1,17 +1,18 @@
 # Bahmni version to install.  Used by add-installer task
 
-bahmni_version: "0.88-101"
+bahmni_version: "0.89-193"
 bahmni_repo_url: "http://dl.bintray.com/bahmni/rpm"
 bahmni_installer_url: "{{ bahmni_repo_url }}/rpms/bahmni-installer-{{ bahmni_version }}.noarch.rpm"
 
 # Customizations to install - endtb_config and custom omods
 implementation_name: ""
-endtb_config_url: "https://github.com/endtb/endtb-config/archive/2.2.0.zip"
+endtb_config_url: "https://github.com/endtb/endtb-config/archive/2.3.0.zip"
 
 # TODO replace this once we fix our build pipeline to actually deploy the omod to some place we can properly grab it from
 # this is used to deploy the latest build of our custom version of bahmniendtb from our build pipeline; during a release we comment this out and deploy via the "omod" variable below
-bahmniendtb_omod_url: "https://openmrs.jfrog.io/openmrs/public/org/bahmni/module/bahmniendtb-omod/2.3.0-SNAPSHOT/bahmniendtb-omod-2.3.0-SNAPSHOT.jar"
-bahmniendtb_omod_target_name: "bahmniendtb-2.3.0-SNAPSHOT.omod"
+#bahmniendtb_omod_url: "https://openmrs.jfrog.io/openmrs/public/org/bahmni/module/bahmniendtb-omod/2.3.0-SNAPSHOT/bahmniendtb-omod-2.3.0-SNAPSHOT.jar"
+#bahmniendtb_omod_target_name: "bahmniendtb-2.3.0-SNAPSHOT.omod"
+
 openmrs_data_directory: "/opt/openmrs"
 
 
@@ -23,8 +24,8 @@ bahmni_installer_directory: "/etc/bahmni-installer"
 bahmni_deployment_artifacts: "{{ bahmni_installer_directory }}/deployment-artifacts"
 
 // TODO: figure out/remember why this variable is defined in both endtb-playbooks and endtb-config?
-#omods: [ "https://github.com/endtb/openmrs-module-bahmniendtb/releases/download/2.1.0/bahmniendtb-2.1.0.omod", "https://modules.openmrs.org/modulus/api/releases/1545/download/dataintegrity-4.2.3.omod", "https://s3.amazonaws.com/endtb-artifacts/1.6/bahmnicore-omod-0.88-SNAPSHOT.omod", "https://s3.amazonaws.com/endtb-artifacts/1.1/bacteriology-1.1-SNAPSHOT.omod"]
-omods: ["https://github.com/endtb/openmrs-module-bahmniendtb/releases/download/2.2.0/bahmniendtb-2.2.0.omod", "https://openmrs.jfrog.io/openmrs/omods/omod/dataintegrity-4.2.3.omod", "https://s3.amazonaws.com/endtb-artifacts/1.6/bahmnicore-omod-0.88-SNAPSHOT.omod", "https://github.com/Bahmni/bacteriology/releases/download/1.1/bacteriology-1.1.omod"]
+#omods: [ "https://github.com/endtb/openmrs-module-bahmniendtb/releases/download/2.1.0/bahmniendtb-2.1.0.omod", "https://modules.openmrs.org/modulus/api/releases/1545/download/dataintegrity-4.2.3.omod",  "https://s3.amazonaws.com/endtb-artifacts/1.1/bacteriology-1.1-SNAPSHOT.omod"]
+omods: ["https://github.com/endtb/openmrs-module-bahmniendtb/releases/download/2.3.0/bahmniendtb-2.3.0.omod", "https://openmrs.jfrog.io/openmrs/omods/omod/dataintegrity-4.2.3.omod", "https://github.com/Bahmni/bacteriology/releases/download/1.1/bacteriology-1.1.omod"]
 
 
 # Expected to be overridden for a particular environment (eg. production, test)
