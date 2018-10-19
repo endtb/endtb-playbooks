@@ -10,9 +10,9 @@ endtb_config_url: "https://github.com/endtb/endtb-config/archive/master.zip"
 #endtb_config_url: "https://github.com/endtb/endtb-config/archive/2.3.2.zip"
 
 # TODO replace this once we fix our build pipeline to actually deploy the omod to some place we can properly grab it from
-# this is used to deploy the latest build of our custom version of bahmniendtb from our build pipeline; during a release we comment this out and deploy via the "omod" variable below
+# this is used to deploy the latest build of our custom version of bahmniendtb from our build pipeline; during a release we comment this out and deploy via the "omods" variable below
 bahmniendtb_omod_url: "https://openmrs.jfrog.io/openmrs/public/org/bahmni/module/bahmniendtb-omod/2.4.0-SNAPSHOT/bahmniendtb-omod-2.4.0-SNAPSHOT.jar"
-#bahmniendtb_omod_target_name: "bahmniendtb-2.3.2.omod"
+bahmniendtb_omod_target_name: "bahmniendtb-2.4.0-SNAPSHOT.omod"
 
 openmrs_data_directory: "/opt/openmrs"
 
