@@ -49,3 +49,6 @@ culture_report: cultureResults.sql
 reports_sql_folder: "/var/www/bahmni_config/openmrs/apps/reports/sql"
 bahmni_user: "bahmni"
 bahmni_group: "bahmni"
+
+### cgi-bin directory for systm date
+cgi_bin_path: "/var/www/cgi-bin"

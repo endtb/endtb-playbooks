@@ -1,0 +1,12 @@
+- name: Ensure cgi-bin folder exists
+  file:
+    path: "{{cgi_bin_path}}"
+    state: directory
+    owner: "{{bahmni_user}}"
+
+- name: Copying systemdate script
+  copy: src=systemdate.sh
+    dest=/var/www/cgi-bin/systemdate
+    mode=755
+    owner={{ bahmni_user }}
+    group={{ bahmni_group }}
