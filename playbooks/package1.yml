@@ -1,0 +1,12 @@
+# This playbook serves to setup a new bahmni server
+
+- hosts: all
+  become: yes
+  gather_facts: false  
+  vars:
+    initializer_url: "https://bamboo.pih-emr.org:81/endtb/modules/initializer-1.1.0.omod"
+    package_url: "https://github.com/endtb/package1.git" 
+    bahmni_user: "bahmni"
+    bahmni_group: "bahmni"
+  tasks: 
+  - include: roles/bahmni/tasks/install-form-packages.yml

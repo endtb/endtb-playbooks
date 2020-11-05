@@ -52,3 +52,8 @@ bahmni_group: "bahmni"
 
 ### cgi-bin directory for systm date
 cgi_bin_path: "/var/www/cgi-bin"
+
+## initializer
+initializer_url: "https://bamboo.pih-emr.org:81/endtb/modules/initializer-1.1.0.omod"
+
+### form packages

@@ -1,0 +1,18 @@
+- name: Download initializer from remote location
+  get_url: url={{ initializer_url }} dest=/opt/openmrs/modules owner={{ bahmni_user }} group={{ bahmni_group }}
+  when: initializer_url is defined
+
+- name: Create Initializer configuration directory
+  file: path="/opt/openmrs/configuration" state=directory owner={{ bahmni_user }} group={{ bahmni_group }}
+
+- name: Download form package
+  git: repo={{ package_url }} dest=/tmp/package
+
+- name: Move concepts folder to /opt/configuration
+  command: mv /tmp/package/concepts /opt/openmrs/configuration/
+
+- name: Move scripts folder to /opt/configuration
+  command: mv /tmp/package/scripts /opt/openmrs/configuration/
+
+- name: Move scripts folder to /opt/configuration
+  command: chown -R {{ bahmni_user }}:{{ bahmni_group }} /opt/openmrs/configuration
