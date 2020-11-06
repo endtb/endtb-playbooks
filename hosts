@@ -1,6 +1,9 @@
-#Productipon
+#Production
 
 [all]
+
+[production]
+localhost ansible_connection=local
 
 # DEV AND TEST SERVERS
 
