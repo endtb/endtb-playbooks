@@ -23,4 +23,4 @@
   command: mv /tmp/package/scripts /opt/openmrs/configuration/
 
 - name: Install exports crontab job
-  cron: job={{ exports_cron }} user={{ bahmni_user }} state=present hour={{ cron_hour }} minute={{ cron_minutes }}
+  cron: name={{ exports_cron }} job="/usr/bin/bahmni-batch belongs_to_external_cohort={{ job_name }}" user={{ bahmni_user }} state=present hour={{ cron_hour }} minute={{ cron_minutes }}
