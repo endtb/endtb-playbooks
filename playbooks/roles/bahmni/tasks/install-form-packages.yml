@@ -5,8 +5,16 @@
 - name: Create Initializer configuration directory
   file: path="/opt/openmrs/configuration" state=directory owner={{ bahmni_user }} group={{ bahmni_group }}
 
+- name: Remove configuration folder if exisits
+  command: rm -rf /tmp/package
+  ignore_errors: true
+
 - name: Download form package
   git: repo={{ package_url }} dest=/tmp/package
+
+- name: Remove configuration folder if exists
+  command: rm -rf /opt/openmrs/configuration/
+  ignore_errors: true
 
 - name: Move concepts folder to /opt/configuration
   command: mv /tmp/package/concepts /opt/openmrs/configuration/
@@ -14,5 +22,8 @@
 - name: Move scripts folder to /opt/configuration
   command: mv /tmp/package/scripts /opt/openmrs/configuration/
 
-- name: Move scripts folder to /opt/configuration
+- name: Change ownership of /opt/configuration
   command: chown -R {{ bahmni_user }}:{{ bahmni_group }} /opt/openmrs/configuration
+
+- name: Install exports crontab job
+  cron: name={{ exports_cron }} user={{ bahmni_user }} state=present hour={{ cron_hour }} minute={{ cron_minutes }}

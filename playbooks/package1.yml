@@ -8,5 +8,8 @@
     package_url: "https://github.com/endtb/package1.git" 
     bahmni_user: "bahmni"
     bahmni_group: "bahmni"
+    exports_cron: "Stem TB exports"
+    cron_hour: 00
+    cron_minutes: 02
   tasks: 
   - include: roles/bahmni/tasks/install-form-packages.yml

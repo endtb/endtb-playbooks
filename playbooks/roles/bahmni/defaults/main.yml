@@ -56,4 +56,9 @@ cgi_bin_path: "/var/www/cgi-bin"
 ## initializer
 initializer_url: "https://bamboo.pih-emr.org:81/endtb/modules/initializer-1.1.0.omod"
 
+## Cron
+exports_cron: "Exports cron"
+cron_hour: 00
+cron_minutes: 02
+
 ### form packages
