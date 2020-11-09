@@ -9,6 +9,7 @@
     bahmni_user: "bahmni"
     bahmni_group: "bahmni"
     exports_cron: "Stem TB exports"
+    job_name: "stemTB"
     cron_hour: 00
     cron_minutes: 02
   tasks: 
