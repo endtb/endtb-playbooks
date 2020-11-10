@@ -1,0 +1,15 @@
+- name: Remove stemtb old repo
+  command: rm -rf /tmp/stemtb
+  ignore_errors: true
+
+- name: Download stemtb config
+  git: repo={{ stemtb_repo_url }} dest=/tmp/stemtb
+
+- name: Backup old dashboard config
+  command: mv /var/www/bahmni_config/openmrs/apps/clinical/dashboard.json /var/www/bahmni_config/openmrs/apps/clinical/dashboard.json_orig
+
+- name: Copy new dashboard config file
+  command: mv /tmp/stemtb/openmrs/apps/dashboard.json /var/www/bahmni_config/openmrs/apps/clinical/dashboard.json
+
+- name: Change owner of dashboard config
+  command: chown {{ bahmni_user }}:{{ bahmni_group }} /var/www/bahmni_config/openmrs/apps/clinical/dashboard.json

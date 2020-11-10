@@ -5,6 +5,7 @@
   gather_facts: false  
   vars:
     initializer_url: "https://bamboo.pih-emr.org:81/endtb/modules/initializer-1.1.0.omod"
+    stemtb_repo_url: "https://github.com/endtb/stem-tb.git"
     package_url: "https://github.com/endtb/package1.git" 
     bahmni_user: "bahmni"
     bahmni_group: "bahmni"
@@ -14,3 +15,4 @@
     cron_minutes: 02
   tasks: 
   - include: roles/bahmni/tasks/install-form-packages.yml
+  - include: roles/bahmni/tasks/add-package1-configurations.yml
