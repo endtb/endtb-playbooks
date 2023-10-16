@@ -1,15 +1,19 @@
 # Install Bahmni
 
-#- include: add-additional-implementation-reports.yml
-#- include: add-report-file-to-sql-folder.yml
-- include: enable-yum-caching.yml
-- include: add-package-dependencies.yml
-- include: add-installer.yml
-- include: add-endtb-config.yml
-- include: install-bahmni.yml
-- include: run-bahmni-batch.yml
-- include: add-additional-cache-artifacts.yml
-- include: deploy-implementation-config.yml
-- include: deploy-bahmniendtb.yml
-- include: add-login-systemdate.yml
-- include: customize-report-names.yml
+- include_tasks: enable-yum-caching.yml
+- include_tasks: add-package-dependencies.yml
+- include_tasks: add-installer.yml
+- include_tasks: add-endtb-config.yml
+- include_tasks: install-bahmni.yml
+
+- include_tasks: add-additional-cache-artifacts.yml
+- include_tasks: deploy-implementation-config.yml
+- include_tasks: deploy-bahmniendtb.yml
+- include_tasks: add-login-systemdate.yml
+- include_tasks: customize-report-names.yml
+
+# Not sure if the below are needed
+
+#- include_tasks: run-bahmni-batch.yml
+#- include_tasks: add-additional-implementation-reports.yml
+#- include_tasks: add-report-file-to-sql-folder.yml

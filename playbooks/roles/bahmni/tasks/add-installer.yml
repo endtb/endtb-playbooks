@@ -1,17 +1,21 @@
+# Remove any existing bahmni-installer package
+
+- name: Remove the existing bahmni-installer rpm
+  shell: yum remove -y bahmni-installer
+
+- name: Remove the existing bahmni-installer directory
+  command: rm -rf /etc/bahmni-installer
+
 # Ensure that the specified version of the bahmni installer package is installed
 
-- name: Check the version of any existing bahmni-installer rpm
-  command: yum list installed bahmni-installer
-  register: existing_bahmni_installer_version  
-  ignore_errors: yes
-
-- include: remove-installer.yml
-  when: existing_bahmni_installer_version.stdout.find("{{ bahmni_version }}") == -1
-
 - name: Install bahmni-installer version {{ bahmni_version }}
-  yum: name="{{ bahmni_installer_url }}" state=present
+  shell: yum install -y {{ bahmni_installer_url }}
 
-# For some reason, as of Feb 2, 2017 ansible installation does not seem to have taken place
-# Explicitly do this again here
+# Add new installer files where Bahmni needs to be patched
 
-- include: install-ansible.yml
+- name: "Add alternative oracle-java.yml file"
+  copy: src=oracle-java.yml
+    dest=/opt/bahmni-installer/bahmni-playbooks/roles/oracle-java/tasks
+    mode=755
+    owner={{ bahmni_user }}
+    group={{ bahmni_group }}

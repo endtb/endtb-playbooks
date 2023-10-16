@@ -1,6 +1,6 @@
 
 - name: Download bahmniendtb from remote location
-  get_url: url={{ bahmniendtb_omod_url }} dest={{ openmrs_data_directory }}/modules/{{ bahmniendtb_omod_target_name }}
+  shell: wget -P {{ openmrs_data_directory }}/modules/ -O {{ bahmniendtb_omod_target_name }} {{ bahmniendtb_omod_url }}
   when: bahmniendtb_omod_url is defined
   register: bahmniendtb_installed
 

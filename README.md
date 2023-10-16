@@ -4,25 +4,47 @@
 Follow instructions for checking out and setting up any
 
 ### Prerequisites
-1. Install latest versions of Ansible, VirtualBox, and Vagrant
-2. Ensure BIOS supports virtualization (if needed) and install VirtualBox Guest Additions if needed
+* Install latest versions of Ansible, VirtualBox, and Vagrant 
+* Ensure BIOS supports virtualization (if needed) and install VirtualBox Guest Additions if needed
 
-### Create your Vagrant Box
-1. Copy the "Vagrantfile" and "endtbdev" script found in the "dev" folder of this project to "~/bahmni/environments/endtb".  
-(If you wish to use a directory other than "~/environments/endtb" to set up your VM you'll need to modify VAGRANT_BOX_DIR in the endtbdev script
-2. Modify "Vagrantfile" this file:
-- Change "{{ENDTB_CONFIG_SRC_DIR}}" to point to the "openmrs" subfolder of the source folder for endtb config on your local machine
-- Change "{{IMPLEMENTATION_CONFIG_SRC_DIR}}" to point to the "openmrs" subfolder of the source folder for the implementation config on your local machine you wish to use
-- Change "{{BAHMNI_APPS_SRC_DIR}}" to point to the source folder for bahmniapps on your local machine
-- Change "{{ENDTB_PLAYBOOKS_SRC_DIR}}" to point to the top-level directory of this project on your local machine
-- Adjust the memory allocated to the VM based on your machine's capacity
-- If you want to enable caching of rpms outside of vagrant (More info on cache issues: https://talk.openmrs.org/t/installing-bahmni-with-limited-internet/5392), 
-change 'config.vm.synced_folder "../yum_cache/", "/etc/yum_cache"' so that the source directory ("../yum_cache") references a directory that exists on your machine.
-(If you don't care about caching, you can remove this line)
-3. Run "vagrant up" from this directory
-4. You might need to SSH into this box for the first time to ensure proper keys are set up (run "ssh vagrant@192.168.33.21", password="vagrant")
+### Setting up the server
+* Create a local directory to use for this.  For example "~/environments/endtb".  We'll refer to this as `$HOME` below.
+* Create a folder in `$HOME` called `yum_cache` (see: https://talk.openmrs.org/t/installing-bahmni-with-limited-internet/5392)
+* Create a symbolic link in `$HOME` to the local folder containing the checked out endtb-playbooks (this should be available at `$HOME/endtb-playbooks`)
+* Create a symbolic link in `$HOME` to the local folder containing the checked out endtb-config (this should be available at `$HOME/endtb-config`)
+* Create a symbolic link in `$HOME` to the local folder containing the checked out openmrs-module-bahmniapps (this should be available at `$HOME/openmrs-module-bahmniapps`)
+* Create a symbolic link to `$HOME/endtb-playbooks/dev/Vagrantfile`
+* Create a symbolic link to `$HOME/endtb-playbooks/dev/endtbdev`
+* Set up your ssh settings by adding the following to your `.ssh/config` file (create this file if it does not yet exist):
+```
+Host vagrant-endtb
+    HostName 192.168.33.21
+    PubkeyAcceptedKeyTypes=+ssh-rsa,ssh-dss
+    HostkeyAlgorithms=+ssh-rsa,ssh-dss
+```
+* Start up the Vagrant box by running `vagrant up`
+* Once this has fired up, setup key-based authentication: `ssh-copy-id vagrant@vagrant-endtb` with password `vagrant`
+* Connect into the box using  `ssh vagrant@vagrant-endtb`
+
+## Commands to run within the Vagrant box
+
+### Installing Ansible
+Due to library dependencies, particularly of Python, with Ansible run from a current O/S on the host, and the version
+of Python supported on the VM, it is currently easiest to simply install Ansible within the Vagrant Box and execute it
+from there.
+```
+sudo su -
+yum install -y epel-release
+yum install -y ansible
 
 ### Provision your Vagrant Box
+
+```
+cd endtb-playbooks
+ansible-playbook --become-user=root -i hosts "playbooks/bahmni.yml" --limit "localhost" -vvvv
+```
+
+
 
 Running a "vagrant up" should also provision your machine for you.  To run the ansible provisioning again, run "vagrant provision"
 

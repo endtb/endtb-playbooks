@@ -1,7 +1,10 @@
 # See: https://talk.openmrs.org/t/installing-bahmni-with-limited-internet/5392
 
-- name: Create yum cache folder, and subfolder for storing additional cache artifacts from the opt folde
+- name: Create yum cache folder, and subfolder for storing additional cache artifacts from the opt folder
   file: path=/etc/yum_cache/opt_rpms/ state=directory
+
+- name: Add dummy file to opt_rpms
+  shell: touch /etc/yum_cache/opt_rpms/dummy
 
 - name: Enable caching of yum repositories
   command: sed -i "s|keepcache=0|keepcache=1|g" /etc/yum.conf

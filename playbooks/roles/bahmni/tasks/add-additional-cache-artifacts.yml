@@ -5,6 +5,7 @@
 - name: Check whether yum caching has run for the first time
   stat: path=/etc/yum_cache/opt_rpms
   register: yum_cache_rpms_folder
+  ignore_errors: yes
 
 - name: Copy anything that exists in /opt into /etc/yum_cache/opt_rpms (this is needed for java download for example)
   shell: cp /opt/*.rpm /etc/yum_cache/opt_rpms

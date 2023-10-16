@@ -17,7 +17,7 @@
 # This will not be needed in the future, but for now release-0.86 does not support configuring SSL certificate paths
 # Once it does, we can remove this and do it via configuration in setup.yml.j2
 
-- include: patch-ssl.yml
+- include_tasks: patch-ssl.yml
   when: ssl_certificate_file_path is defined
 
 ###### end temporary patch
@@ -25,7 +25,7 @@
 # Run the bahmni installer from the {{ bahmni_installer_directory }} directory
 
 - name: Run the bahmni installer
-  shell: bahmni -i inventory install
+  shell: bahmni -i inventory -aru https://repo.mybahmni.org/releases/ansible-2.4.6.0-1.el7.ans.noarch.rpm install
   args:
     chdir: "{{ bahmni_installer_directory }}"
     executable: /bin/bash

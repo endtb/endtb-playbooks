@@ -1,9 +1,0 @@
-
-# Download ansible if it doesn't already exist and install it
-
-- name: Retrieve the ansible RPM
-  get_url: url=https://dl.bintray.com/bahmni/rpm/ansible-2.2.0.0-3.el6.noarch.rpm dest=/etc/yum_cache
-
-- name: Install ansible
-  command: yum install -y /etc/yum_cache/ansible-2.2.0.0-3.el6.noarch.rpm
-  ignore_errors: yes

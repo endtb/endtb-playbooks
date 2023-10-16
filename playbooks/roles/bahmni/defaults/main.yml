@@ -1,8 +1,10 @@
 # Bahmni version to install.  Used by add-installer task
 
+click_url: "https://files.pythonhosted.org/packages/f8/5c/f60e9d8a1e77005f664b76ff8aeaee5bc05d0a91798afd7f53fc998dbc47/Click-7.0.tar.gz"
+
 bahmni_version: "0.89-193"
-bahmni_repo_url: "http://dl.bintray.com/bahmni/rpm"
-bahmni_installer_url: "{{ bahmni_repo_url }}/rpms/bahmni-installer-{{ bahmni_version }}.noarch.rpm"
+bahmni_repo_url: "https://repo.mybahmni.org/releases"
+bahmni_installer_url: "{{ bahmni_repo_url }}/bahmni-installer-{{ bahmni_version }}.noarch.rpm"
 
 # Customizations to install - endtb_config and custom omods
 implementation_name: ""
@@ -11,12 +13,11 @@ endtb_config_url: "https://github.com/endtb/endtb-config/archive/master.zip"
 
 # TODO replace this once we fix our build pipeline to actually deploy the omod to some place we can properly grab it from
 # this is used to deploy the latest build of our custom version of bahmniendtb from our build pipeline; during a release we comment this out and deploy via the "omods" variable below
-bahmniendtb_omod_url: "https://openmrs.jfrog.io/openmrs/public/org/bahmni/module/bahmniendtb-omod/2.3.4-SNAPSHOT/bahmniendtb-omod-2.3.4-SNAPSHOT.jar"
-bahmniendtb_omod_target_name: "bahmniendtb-2.3.4-SNAPSHOT.omod"
+bahmniendtb_omod_url: "https://openmrs.jfrog.io/artifactory/public/org/bahmni/module/bahmniendtb-omod/2.3.3/bahmniendtb-omod-2.3.3.jar"
+bahmniendtb_omod_target_name: "bahmniendtb-2.3.3.omod"
 
 # TODO: figure out/remember why this variable is defined in both endtb-playbooks and endtb-config?
-omods: ["https://github.com/endtb/openmrs-module-bahmniendtb/releases/download/2.3.3/bahmniendtb-2.3.3.omod", "https://openmrs.jfrog.io/openmrs/omods/omod/dataintegrity-4.2.3.omod", "https://github.com/Bahmni/bacteriology/releases/download/1.1/bacteriology-1.1.omod"]
-
+omods: ["https://github.com/endtb/openmrs-module-bahmniendtb/releases/download/2.3.3/bahmniendtb-2.3.3.omod", "https://openmrs.jfrog.io/openmrs/omods/omod/dataintegrity-4.2.3.omod", "https://github.com/openmrs/bacteriology/releases/download/1.1/bacteriology-1.1.omod"]
 
 openmrs_data_directory: "/opt/openmrs"
 
