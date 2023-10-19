@@ -16,9 +16,9 @@ RUN_LIQUIBASE="/opt/bahmni-installer/bahmni-playbooks/roles/implementation-confi
 # Usage:  run_in_vagrant -c "echo 'hello'"
 function run_in_vagrant {
     if [ "$1" == "-c" ]; then
-		ssh vagrant@192.168.33.21 -oConnectTimeout=5 -oHostkeyAlgorithms=ssh-rsa,ssh-dss "$2"
+		ssh vagrant@vagrant-endtb -oConnectTimeout=5 "$2"
 	elif [ "$1" == "-f" ]; then
-		ssh vagrant@192.168.33.21 -oConnectTimeout=5 -oHostkeyAlgorithms=ssh-rsa,ssh-dss < "$2"
+		ssh vagrant@vagrant-endtb -oConnectTimeout=5 < "$2"
 	fi
 }
 
