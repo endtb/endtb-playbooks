@@ -8,8 +8,18 @@
       - git
       - libselinux-python
       - emacs
+      - python-pip
 
 - name: set selinux state and policy
   selinux:
     policy=targeted
     state=permissive
+
+- name: upgrade python-setuptools
+  shell: yum upgrade python-setuptools
+
+- name: Install Click
+  shell: wget {{ click_url }} -O /tmp/Click.tar.gz
+
+- name: Install Click
+  shell: pip install /tmp/Click.tar.gz

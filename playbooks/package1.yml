@@ -14,5 +14,5 @@
     cron_hour: 00
     cron_minutes: 02
   tasks: 
-  - include: roles/bahmni/tasks/install-form-packages.yml
-  - include: roles/bahmni/tasks/add-package1-configurations.yml
+  - include_tasks: roles/bahmni/tasks/install-form-packages.yml
+  - include_tasks: roles/bahmni/tasks/add-package1-configurations.yml

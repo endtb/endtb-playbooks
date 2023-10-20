@@ -6,21 +6,16 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure(2) do |config|
-  config.vm.box = "bento/centos-6.7"
+  config.vm.box = "bento/centos-6.10"
   config.vm.network "private_network", ip: "192.168.33.21"
   config.vm.network :forwarded_port, guest: 8000, host: 1044
   config.vm.provider "virtualbox" do |vb|
       vb.name = "endtb"
       vb.customize ["modifyvm", :id, "--memory", "3072", "--cpus", "2"]
   end
-  config.vm.synced_folder "../yum_cache/", "/etc/yum_cache"
-  config.vm.synced_folder "{{ENDTB_CONFIG_SRC_DIR}}", "/home/vagrant/bahmni_config/openmrs", create: true
-  config.vm.synced_folder "{{BAHMNI_APPS_SRC_DIR}}", "/home/vagrant/bahmniapps", create: true
-  config.vm.synced_folder "{{IMPLEMENTATION_CONFIG_SRC_DIR}}", "/home/vagrant/implementation_config/openmrs", create: true
+  config.vm.synced_folder "./yum_cache/", "/etc/yum_cache"
+  config.vm.synced_folder "./endtb-config/", "/home/vagrant/bahmni_config"
+  config.vm.synced_folder "./openmrs-module-bahmniapps/", "/home/vagrant/bahmniapps"
+  config.vm.synced_folder "./endtb-playbooks/", "/home/vagrant/endtb-playbooks"
   config.vm.hostname = "endtb"
-
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "{{ENDTB_PLAYBOOKS_SRC_DIR}}/playbooks/bahmni.yml"
-  end
-
 end

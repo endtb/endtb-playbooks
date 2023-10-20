@@ -7,7 +7,6 @@ VAGRANT_IMPLEMENTATION_CONFIG_SRC="/home/vagrant/implementation_config/openmrs"
 
 STARTING_DIR="$PWD"
 BIN_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-PRIVATE_KEY="$VAGRANT_BOX_DIR/.vagrant/machines/default/virtualbox/private_key"
 VAGRANT_CONFIG_DEST="/var/www/bahmni_config"
 VAGRANT_BAHMNI_APPS_DEST="/var/www/bahmniapps"
 VAGRANT_IMPLEMENTATION_CONFIG_DEST="/var/www/implementation_config"
@@ -17,9 +16,9 @@ RUN_LIQUIBASE="/opt/bahmni-installer/bahmni-playbooks/roles/implementation-confi
 # Usage:  run_in_vagrant -c "echo 'hello'"
 function run_in_vagrant {
     if [ "$1" == "-c" ]; then
-		ssh vagrant@192.168.33.21 -i $PRIVATE_KEY "-o ConnectTimeout=5" "$2"
+		ssh vagrant@vagrant-endtb -oConnectTimeout=5 "$2"
 	elif [ "$1" == "-f" ]; then
-		ssh vagrant@192.168.33.21 -i $PRIVATE_KEY "-o ConnectTimeout=5" < "$2"
+		ssh vagrant@vagrant-endtb -oConnectTimeout=5 < "$2"
 	fi
 }
 
