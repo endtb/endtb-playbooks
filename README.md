@@ -60,3 +60,7 @@ Once the installation has finished, you should be able to bring it up in your br
 You will need to proceed through the unsafe certificate warning.
 
 You'll be able to login with the default credentials of `superman` / `Admin123`
+
+# Making Changes
+
+Any changes made to the source outside of the Vagrant box can be applied within the Vagrant box using the `endtbdev` utility.
